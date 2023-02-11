@@ -29,7 +29,6 @@ def get_nvim_socket(window, vim_id):
 
 def get_winnr(socket_filename):
     request = b'\x94\x00\x02\xa9nvim_eval\x91\xa7winnr()'
-    # socket_filename = '/Users/az/.local/share/nvim/sockets/fastnav.socket'
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     sock.connect(socket_filename)
     sock.sendall(request)
@@ -60,9 +59,9 @@ def main():
 @result_handler(no_ui=True)
 def handle_result(args, result, target_window_id, boss):
     window = boss.window_id_map.get(target_window_id)
-    direction = args[2]
-    key_mapping = args[3]
-    vim_id = args[4] if len(args) > 4 else "n?vim"
+    direction = args[1]
+    key_mapping = args[2]
+    vim_id = args[3] if len(args) > 4 else "n?vim"
 
     if window is None:
         return
@@ -76,3 +75,4 @@ def handle_result(args, result, target_window_id, boss):
             boss.active_tab.neighboring_window(direction)
     else:
         boss.active_tab.neighboring_window(direction)
+
