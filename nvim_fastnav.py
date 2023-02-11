@@ -33,7 +33,7 @@ def get_winnr(socket_filename):
     sock.connect(socket_filename)
     sock.sendall(request)
     response = sock.recv(4096)
-    socket.close()
+    sock.close()
     winnr = response[4]
     return winnr
 
