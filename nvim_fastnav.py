@@ -30,6 +30,7 @@ def get_nvim_socket(window, vim_id):
 def get_winnr(socket_filename):
     request = b'\x94\x00\x02\xa9nvim_eval\x91\xa7winnr()'
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    sock.settimeout(.5)
     sock.connect(socket_filename)
     sock.sendall(request)
     response = sock.recv(4096)
