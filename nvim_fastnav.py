@@ -36,7 +36,7 @@ def get_winnr(socket_filename):
         sock.sendall(request)
         response = sock.recv(4096)
         winnr = response[4]
-    except TimeoutError:
+    except socket.timeout:
         winnr = 0
 
     sock.close()
